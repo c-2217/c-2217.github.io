@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final</title>
+  <style>
+    span {
+  display: block;
+}
+    html {
+  font-family: 'Verdana', Geneva, sans-serif;
+  line-height: 1.6;
+  color: #F5FFFA;
+  background: #708090;
+}
+#info {
+ max-width: 1200px;
+  margin: 0 auto;
+}
+    h1 {
+      text-decoration: underline;
+    }
+    h2 {
+  text-overflow: ellipsis; 
+    }
+      img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+    a:link {
+  color: red;
+}
+    a:active {
+  color: green;
+}
+    a:visited {
+  color: black;
+}
+    a:hover {
+      background-color: yellow;
+  color: blue;
+}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>
+      Pale Blue Dot
+    </h1>
+    </br>
+  </header>
+  <section id="img">
+</section>
+  <br />
+</section>
+</br>
+  <section id="info">
+  </section>
+  </br>
+  <section id="misc">
+    <p>
+      Follow APOD on: Instagram, Facebook,  Reddit, or Twitter!
+    </br>
+Or, find past stories/images <a href="https://apod.nasa.gov/apod/archivepix.html">here!</a>
+    </p>
+    </br>
+</section>
+  </br>
+  <script>
+  var header = document.querySelector("header");
+var image = document.querySelector("section#img");
+var section = document.querySelector("info");
+var links = document.querySelector("misc");
+var requestURL = "https://api.nasa.gov/planetary/apod?api_key=yoCLrO1qrJoLzGQx3yNNL2OWgey7e7s7aTEGj5PK";
+var request = new XMLHttpRequest();
+request.open("GET", requestURL);
+request.responseType = "json";
+request.send();
+request.onload = function() {
+    var loveSpace = request.response;
+    earthNews(loveSpace);
+    otherData(loveSpace);
+}
+function earthNews(jsonObj) {
+    var myH1 = document.createElement("h1");
+    myH1.textContent = "Today's Entry:" + ' ' + jsonObj["title"] + ' \n(Retrieved on: ' + jsonObj["date"] + ' by ' + jsonObj["copyright"] + ')';
+    header.appendChild(myH1);
+    var myPara = document.createElement("h2");
+    myPara.textContent = "Story: " + '\n' + jsonObj["explanation"];
+    header.appendChild(myPara);
+  var myMisc = document.createElement("p");
+    myMisc.textContent = "Service Version: " + jsonObj["service_version"];
+    header.appendChild(myMisc);
+}
+function otherData(jsonObj) {
+    var myImg = document.createElement("img");
+    myImg.src = jsonObj["hdurl"];
+    image.appendChild(myImg);
+}
+  </script>
+</body>
+</html>
